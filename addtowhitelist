@@ -1,0 +1,7 @@
+#!/bin/bash
+
+insert=$1
+file='/opt/zimbra/data/spamassassin/localrules/local.cf'
+
+sed -i "/endif/iwhitelist_from $1" $file
+zmamavisdctl restart
