@@ -1,7 +1,13 @@
 #!/bin/bash
 
+pattern=^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$
 insert=$1
 file='/opt/zimbra/data/spamassassin/localrules/local.cf'
+
+if ! [[ $1 =~ $pattern ]]; then
+	echo "Wrong argument"
+	exit 2
+fi
 
 sed -i "/endif/iwhitelist_from $1" $file
 zmamavisdctl restart
